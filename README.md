@@ -1,2 +1,2 @@
-# F26_P8130
+# P8130
 Repo for Biostat Methods I Fall 2026.
