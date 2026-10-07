@@ -1,0 +1,374 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem} 
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{parskip}
+
+\newcommand{\solution}{\par\medskip\noindent\textbf{Solution:}\par\vspace{0cm}}
+
+\title{Homework 2}
+\author{Jonathan Morris}
+\date{}
+
+\begin{document}
+\maketitle
+
+%==================================================
+\section*{Question 1 \quad Interpreting statistical statements}
+\textit{Short answer}
+
+Answer each part in two to four sentences. Use precise language about what is random and what is fixed.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Distinguish a population parameter, an estimator, and an estimate. Give one example of each when estimating a population mean.
+  \solution
+
+  A population parameter describes a fixed measure describing a characteristic of an entire population. 
+  An estimator is a formula or rule used to calculate an estimate. 
+  The estimate is a quantity used to approximate the population parameter using data from a sample.
+
+
+
+  When estimating the population mean, the true mean of the population ($\mu$) would be the population parameter. 
+  $\bar{X} = \frac{1}{n} \sum_{1}^{n} x_i$ would serve as the estimator of the population mean, where n represents the number of observations in the sample, and $x_1, x_2, \dots, x_n$ represents the sample observations. 
+  Lastly, the actual computed quantity of $\bar{X}$ would represent the estimate of the population mean.
+  
+  \item Explain the difference between the standard deviation of individual observations and the standard error of a sample mean. Under independent, identically distributed sampling with finite variance, what happens to the standard error when the sample size is multiplied by four?
+  \solution
+
+  The standard error of the sample mean is calculated as $\frac{\sigma}{\sqrt{n}}$, and represents the standard deviation from a set of sample means, each sample of size n, drawn from a population with underlying variance $\sigma^2$.
+  In contrast, the standard deviation of an individual observation represents $\sigma$, the underlying deviation from the population mean.
+
+  Under iid sampling with finite variance, the standard error shrinks by a factor of 2 when the sample size is multiplied by 4. Observe the following calculation for a case where we increase the sample size from $n$ to $4n$:
+
+  \[
+  se(\bar{X}) = \frac{\sigma}{\sqrt{4n}} = \frac{\sigma}{2\sqrt{n}}
+  \]
+
+  Hence, as shown, our standard error reduces by half when the sample size is multiplied by 4.
+  
+
+  \item Correct this statement: ``A 95\% confidence interval contains 95\% of individual observations, and there is a 95\% frequentist probability that the fixed population mean lies inside the particular interval already calculated.''
+  \solution
+
+  Correct statement: ``A 95\% confidence interval for $\mu$ is a random interval that contains $\mu$ with 95\% probability; if we were to take many random samples and calculate the confidence interval for each sample, then about 95\% of these samples would contain $\mu$.''
+
+  \item Correct this statement: ``A p-value of 0.03 means that the null hypothesis has a 3\% probability of being true; a p-value above 0.05 proves the null hypothesis.''
+  \solution
+
+  Correct statement: ``A p-value of 0.03 means that under that null distribution, we have a 3\% probability of rejecting the null; a p-value above 0.05 implies that under the null, the probability of rejecting the null is over 5\%.''
+\end{enumerate}
+
+%==================================================
+\newpage
+\section*{Question 2 \quad A discrete probability distribution}
+\textit{Hand calculation}
+
+The number of positive responses in a group of three is modeled by the following probability mass function. Do not assume a binomial model.
+
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+$x$ & 0 & 1 & 2 & 3 \\
+\midrule
+$P(X = x)$ & 0.10 & 0.20 & 0.40 & 0.30 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Verify that the table is a valid probability mass function. Write the complete piecewise cumulative distribution function $F_X(t) = P(X \leq t)$, including values outside the support.
+  \solution
+
+  To verify that the table is a valid pdf we must show (1) that the pdf sums to 1 over all possible values of X, and (2) that $\mathbb{P}(X = x) \geq 0, \ \forall x$.
+
+  (1) First, observe that $\sum_{x} \mathbb{P}(X = x) = 0.10 + 0.20 + 0.40 + 0.30 = 1$.
+  
+  
+  (2) Additionally, based on the table, $\mathbb{P}(X = x) > 0 \ \forall x \in \{0, 1, 2, 3\}$. Otherwise, $\mathbb{P}(X = x) > 0 \ \forall x \notin \{0, 1, 2, 3\}$. Hence, $\mathbb{P}(X = x) \geq 0, \ \forall x$.
+
+  Now that we know the pdf is valid, we can derive the CDF as follows:
+
+  \begin{center}
+  \begin{tabular}{lccccc}
+  \toprule
+  $x \in$ & $(-\infty, 0)$ & $[0, 1)$ & [1,2) & [2, 3) & $[3, \infty)$ \\
+  \midrule
+  $F_X(x)$ & 0 & 0.10 & 0.30 & 0.70 & 1 \\
+  \bottomrule
+  \end{tabular}
+  \end{center}
+
+
+
+  \item Calculate $F_X(1.5)$, $P(X \geq 2)$, and $P(X > 2)$. Explain why the last two answers differ.
+  \solution
+
+  Observe the following calculations based on the table. Because $x = 1.5 \in [1, 2)$:
+
+  \[
+  F_X(1.5) = 0.3
+  \]
+
+  We can calculate the final two probabilities as follows:
+
+  \begin{align*}
+    \mathbb{P}(X \geq 2) &= 1 - \mathbb{P}(X < 2) \\
+    &= 1 - (\mathbb{P}(X = 0) + \mathbb{P}(X = 1)) \\
+    &= 1 - (0.1 + 0.2) \\
+    &= 0.7 
+  \end{align*}
+
+  \begin{align*}
+    \mathbb{P}(X > 2) &= 1 - \mathbb{P}(X \leq 2) \\
+    &= 1 - (\mathbb{P}(X = 0) + \mathbb{P}(X = 1) + \mathbb{P}(X = 2)) \\
+    &= 1 - (0.1 + 0.2 + 0.4) \\
+    &= 0.3
+  \end{align*}
+
+  The last two probabilities differ because we are operating in a discrete probability space and $\mathbb{P}(X > 2)$ does not include the event that $X = 2$, while $\mathbb{P}(X \geq 2)$ does. Hence, because $\mathbb{P}(X = 2) = 0.4 > 0$, our probabilities cannot be equivalent.
+
+  \item Calculate $E(X)$, $E(X^2)$, $\text{Var}(X)$, and $\text{SD}(X)$ directly from the table. Explain how the mean can be a value that the random variable cannot take.
+  \solution
+
+  Observe the following calculations:
+
+  \begin{align*}
+  \mathbb{E}[X] &= \sum_{x = 0}^{\infty} x \mathbb{P}(X = x) \\
+  &= \sum_{x = 0}^{3} x \mathbb{P}(X = x) \\
+  &= 0\mathbb{P}(X = 0) + 1\mathbb{P}(X = 1) + 2\mathbb{P}(X = 2) + 3\mathbb{P}(X = 3) \\
+  &= 0(0.10) + 1(0.20) + 2(0.40) + 3(0.30) \\
+  &= 0.20 + 0.80 + 0.90 \\
+  &= 1.90
+  \end{align*}
+
+  \begin{align*}
+  \mathbb{E}[X^2] &= \sum_{x = 0}^{\infty} x^2 \mathbb{P}(X = x) \\
+  &= \sum_{x = 0}^{3} x^2 \mathbb{P}(X = x) \\
+  &= 0^2\mathbb{P}(X = 0) + 1^2\mathbb{P}(X = 1) + 2^2\mathbb{P}(X = 2) + 3^2\mathbb{P}(X = 3) \\
+  &= 0(0.10) + 1(0.20) + 4(0.40) + 9(0.30) \\
+  &= 0.2 + 1.6 + 2.7 \\
+  &= 4.5
+  \end{align*}
+
+  Now, using the above computed quantities and the identity $\text{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2$, we can compute the sd and variance:
+  
+  \begin{align*}
+  \text{Var}(X) &= \mathbb{E}[X^2] - (\mathbb{E}[X])^2 \\
+  &= 4.5 - (1.9)^2 \\
+  &= 0.89
+  \end{align*}
+
+  \begin{align*}
+    \text{SD}(X) = \sqrt{\text{Var}(X)} = \sqrt{0.89} \approx 0.943
+  \end{align*}
+
+
+\end{enumerate}
+
+%==================================================
+\newpage
+\section*{Question 3 \quad Binomial counts and Poisson counts}
+\textit{Hand calculation}
+
+Use the assumptions stated in each scenario. Show the probability formulas and substitutions.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Eight independent patients each have response probability 0.25. Let $X$ count responses. State the distribution and the four binomial conditions. Calculate $P(X = 2)$ and $P(X \geq 1)$.
+  \solution
+
+  \item Write $X$ as a sum of Bernoulli indicators. Derive its mean and variance, explaining where independence is used.
+  \solution
+
+  \item Calls arrive according to a homogeneous Poisson process at a rate of 6 per hour. Let $Y$ count calls in 45 minutes. State its distribution and calculate $P(Y = 0)$, $P(Y \geq 2)$, $E(Y)$, and $\text{Var}(Y)$.
+  \solution
+
+  \item Explain why the parameter for 45 minutes is not 6. Give one feature of real call arrivals that could make the homogeneous Poisson model inappropriate.
+  \solution
+\end{enumerate}
+
+%==================================================
+\newpage
+\section*{Question 4 \quad Densities and continuous probabilities}
+\textit{Hand calculation}
+
+A continuous random variable has the density below, where $c$ is an unknown constant.
+\[
+f_X(x) =
+\begin{cases}
+cx^2, & 0 < x < 1, \\
+0, & \text{otherwise.}
+\end{cases}
+\]
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Determine $c$ by integration, and write the complete piecewise CDF.
+  \solution
+
+  \item Calculate $P(0.25 < X < 0.75)$, $E(X)$, $E(X^2)$, and $\text{Var}(X)$ using integrals.
+  \solution
+
+  \item Calculate $f_X(0.8)$ and $P(X = 0.8)$. Explain why a density value greater than one is valid.
+  \solution
+
+  \item Separately, let $W \sim \text{Uniform}(4, 16)$. Calculate $P(7 < W < 13)$, $E(W)$, and $\text{Var}(W)$.
+  \solution
+\end{enumerate}
+
+%==================================================
+\newpage
+\section*{Question 5 \quad Normal measurements and sample means}
+\textit{Hand calculation}
+
+For parts (a) and (b), suppose independent measurements follow $N(100, 12^2)$, where 12 is the population standard deviation.
+
+For hand calculations, use the supplied values: $\Phi(1.5) = 0.933193$, $\Phi(2) = 0.977250$, $z_{0.90} = 1.281552$, and $z_{0.975} = 1.959964$. All quantiles in this homework use left-tail probabilities.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Find the probability that one measurement exceeds 118, and find the 90th percentile of individual measurements. Show the standardization or quantile equation.
+  \solution
+
+  \item For a sample of 36 measurements, derive $E(\bar{X})$, $\text{Var}(\bar{X})$, and $\text{SE}(\bar{X})$. State the exact sampling distribution of $\bar{X}$ and calculate $P(\bar{X} > 104)$.
+  \solution
+
+  \item Now treat the population mean $\mu$ as unknown while the population SD remains known to be 12. A sample of size 36 has mean 103. Derive and calculate a two-sided 95\% confidence interval for $\mu$.
+  \solution
+
+  \item With the same known population SD, find the smallest planned sample size giving a 95\% confidence interval with margin of error at most 3. Show the inequality and round in the correct direction.
+  \solution
+
+  \item If the population is not normal but observations remain iid with finite, positive variance, which moment and SE results remain exact? What does the central limit theorem imply about the sampling distribution? Explain why a universal rule of ``$n$ at least 30'' is not a guarantee.
+  \solution
+\end{enumerate}
+
+%==================================================
+\newpage
+\section*{Question 6 \quad Inference with an unknown population variance}
+\textit{Hand calculation}
+
+The following nine illustrative measurements are an independent sample from a normal population with unknown mean and variance. The same values are supplied in \texttt{measurements.csv}.
+\[
+94, \ 96, \ 98, \ 100, \ 100, \ 100, \ 102, \ 104, \ 106
+\]
+
+Use $t_{8,\,0.975} = 2.306004$, $\chi^2_{8,\,0.025} = 2.179731$, and $\chi^2_{8,\,0.975} = 17.534546$.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Calculate $n$, $\bar{x}$, the sum of squared deviations, the unbiased sample variance $s^2$, the sample SD $s$, and the estimated standard error of the mean. Show the arithmetic.
+  \solution
+
+  \item State the $t$ pivot and derive a two-sided 95\% confidence interval for the population mean. Explain why the reference distribution has $n - 1$ degrees of freedom and why 1.96 is not the correct critical value here.
+  \solution
+
+  \item Test $H_0: \mu = 96$ against $H_1: \mu \neq 96$ at significance level 0.05. Calculate the test statistic, state the rejection rule, write the two-sided p-value expression, and give the decision and a contextual conclusion. Verify agreement with part (b). A numerical p-value is optional; a correct CDF expression is sufficient.
+  \solution
+
+  \item State the chi-square pivot, invert its central 95\% probability statement, and calculate confidence intervals for the population variance and population SD. Explain why the larger chi-square quantile is used in the lower endpoint and state the normality assumption.
+  \solution
+\end{enumerate}
+
+%==================================================
+\newpage
+\section*{Question 7 \quad Exact probabilities and approximations in Python}
+\textit{Python coding}
+
+Use NumPy and SciPy. Set \texttt{numpy.random.default\_rng(207)} and use 100,000 independent draws for each simulation. Process cases A, B, C, and then the rare-event example in that order.
+
+\begin{center}
+\begin{tabular}{clll}
+\toprule
+Case & Model & Target & Approximation to evaluate \\
+\midrule
+A & $X \sim \text{Binomial}(200, 0.01)$ & $P(X \geq 4)$  & Poisson with mean $np$ \\
+B & $X \sim \text{Binomial}(100, 0.30)$ & $P(X \geq 40)$ & Normal with continuity correction \\
+C & $X \sim \text{Poisson}(25)$         & $P(X \geq 35)$ & Normal with continuity correction \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item For each case, calculate the exact probability, the stated approximation, absolute error, and relative error. Define relative error as absolute error divided by the exact probability. State every approximation parameter and the corrected normal cutoff.
+  \solution
+
+  \item Simulate each count model and estimate the same probability. Present a table comparing exact, approximate, and simulated values. Explain whether the approximation is useful for each event, distinguishing absolute from relative error.
+  \solution
+
+  \item For $R \sim \text{Binomial}(4000, 0.0001)$, calculate $P(R \geq 10)$ accurately with a survival function. Simulate 100,000 draws, report the number satisfying the event, and calculate the expected number of such occurrences. Explain why observing zero does not establish that the probability is zero.
+  \solution
+\end{enumerate}
+
+Include your Python code, the numerical comparison table, and the rare-event output. Use \texttt{binom.sf(k - 1, ...)} or \texttt{poisson.sf(k - 1, ...)} for an inclusive upper tail.
+
+%==================================================
+\newpage
+\section*{Question 8 \quad Inverse transform simulation in R}
+\textit{R coding}
+
+Use only \texttt{runif} for random-number generation; \texttt{qnorm} is allowed as a deterministic quantile function. Set \texttt{set.seed(208)}, use 100,000 draws per target, and generate three separate uniform vectors in the order Normal, Bernoulli, polynomial.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item State the generalized inverse $F^{-1}(u) = \inf\{x : F(x) \geq u\}$ for $0 < u < 1$. Derive transformations from $U \sim \text{Uniform}(0, 1)$ to $Y \sim N(50, 8^2)$, $D \sim \text{Bernoulli}(0.30)$, and a variable $X$ with the density in Question 4. Use the generalized-inverse convention for the Bernoulli threshold.
+  \solution
+
+  \item Implement the three transformations. Report sample means and sample variances alongside their theoretical values. Estimate $P(Y > 58)$, $P(D = 1)$, and $P(X \leq 0.5)$ and compare with theory.
+  \solution
+
+  \item Make density-scale histograms for the Normal and polynomial variables, overlaying their theoretical density curves. Explain why the two continuous transformations give the specified CDFs.
+  \solution
+
+  \item State the continuous probability integral transform. For the Bernoulli variable, list the possible values and probabilities of $F_D(D)$ and explain why it is not uniform. Explain why reusing one uniform vector for all three transformations would not produce independent columns.
+  \solution
+\end{enumerate}
+
+Include the R code, output tables, both plots, and explanations. Do not call \texttt{rnorm}, \texttt{rbinom}, or a direct sampler for the polynomial variable.
+
+%==================================================
+\newpage
+\section*{Question 9 \quad Constructing $t$ and chi-square distributions in Python}
+\textit{Python coding}
+
+Use 100,000 replications and \texttt{numpy.random.default\_rng(209)}. For each degree of freedom, generate the normal matrix first and a separate normal numerator second; process 5 df before 30 df.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item For $\nu = 5$ and $\nu = 30$, generate independent standard normal values and construct $Q = \sum_{j=1}^{\nu} Z_j^2$ and $T = Z_0 / \sqrt{Q/\nu}$, with $Z_0$ independent of all terms in $Q$. Do not use direct chi-square or $t$ random samplers. Explain why independence matters.
+  \solution
+
+  \item Report the sample mean and variance of $Q$ and $T$, and compare them with their theoretical values. Estimate $P(Q > \chi^2_{\nu,\,0.95})$ and $P(|T| > 1.96)$; compare with the correct theoretical tail probabilities. Explain the change in $t$ tails as the degrees of freedom increase and state when the $t$ mean and variance exist.
+  \solution
+
+  \item For 5 df, plot density-scale histograms of $Q$ and $T$ with their theoretical densities. Add the standard normal density to the $t$ panel.
+  \solution
+
+  \item In a separate sample of 100 independent observations, four categories have observed counts (18, 22, 26, 34). Under the null, each category has fixed probability 0.25, with no parameters estimated from these counts. Calculate the Pearson goodness-of-fit statistic, degrees of freedom, and approximate p-value. State the decision at 0.05 and the conditions supporting the chi-square reference.
+  \solution
+\end{enumerate}
+
+Include code, output tables, both plots, and interpretations. Use sample variance with \texttt{ddof=1}.
+
+%==================================================
+\newpage
+\section*{Question 10 \quad Coverage and testing in R}
+\textit{R coding}
+
+Simulate independent normal samples with mean 100 and SD 12. Set \texttt{set.seed(210)}, use 20,000 replications, and process sample sizes 10 and then 40. For each size, use \texttt{matrix(rnorm(B*n, 100, 12), nrow=B)}, with one sample per row.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item For each sample, construct three nominal 95\% mean intervals: a $t$ interval using the sample SD, a $z$ interval using the known SD of 12, and a $z$ interval incorrectly substituting the sample SD for the known SD. Estimate each method's coverage of the true mean. Also report the average width of the $t$ interval.
+  \solution
+
+  \item For the same samples, test $H_0: \mu = 100$ against $H_1: \mu \neq 100$ using a two-sided $t$ test at 0.05. Estimate the Type I error rate. For every replication, check whether rejection agrees with exclusion of 100 from the $t$ interval, and report the number of disagreements.
+  \solution
+
+  \item Add 4 to every observation in the same samples, so the true mean becomes 104. Apply the same $t$ test against 100. Estimate power and Type II error for each sample size.
+  \solution
+
+  \item Plot the three coverage estimates by sample size, with a horizontal line at 0.95. Interpret coverage, width, Type I error, and power. Explain why the interval using $z$ with the sample SD undercovers, particularly for the smaller sample.
+  \solution
+\end{enumerate}
+
+Include code, the numerical results, the coverage plot, and explanations. Identify what is counted in each simulated proportion; do not describe power as the probability that the alternative hypothesis is true.
+
+\end{document}
