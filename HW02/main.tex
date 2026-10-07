@@ -180,14 +180,146 @@ Use the assumptions stated in each scenario. Show the probability formulas and s
   \item Eight independent patients each have response probability 0.25. Let $X$ count responses. State the distribution and the four binomial conditions. Calculate $P(X = 2)$ and $P(X \geq 1)$.
   \solution
 
+  We can observe that $X \sim Bin(8, 0.25)$. For the binomial distribution we have the following four conditions:
+
+  \begin{enumerate}
+    \item n fixed (n = 8).
+    \item Binary outcomes (response yes vs no).
+    \item Independent trials (independent patients).
+    \item Constant p across trials (p = 0.25).
+  \end{enumerate}
+
+  Hence, in this case all the conditions hold, so we confirm that $X \sim Bin(8, 0.25)$.
+
+  We can use the pdf of the binomial $ \mathbb{P}(X = x) = \binom{8}{x}(0.25)^x(0.75)^{8-x}$ to find the requested probabilties:
+
+
+  \[
+  \mathbb{P}(X = 2) = \binom{8}{2}(0.25)^2(0.75)^{6} = 28(0.0625)(0.178) \approx 0.311.
+  \]
+
+  \[
+  \mathbb{P}(X \geq 1) = 1 - \mathbb{P}(X < 1) = 1 - \mathbb{P}(X = 0) = 1 - \binom{8}{0}(0.25)^0(0.75)^{8} = (0.75)^{8} \approx 0.100
+  \]
+
+  \begin{align*}
+    \mathbb{P}(X \geq 1) &= 1 - \mathbb{P}(X < 1) \\
+    &= 1 - \mathbb{P}(X = 0) \\
+    &= 1 - \binom{8}{0}(0.25)^0(0.75)^{8} \\
+    &= (0.75)^{8} \\ 
+    &\approx 0.100
+  \end{align*}
   \item Write $X$ as a sum of Bernoulli indicators. Derive its mean and variance, explaining where independence is used.
   \solution
+
+  Let $x_i \sim \text{Ber}(0.25) \quad \forall i \in \{1, 2, \dots, 8\}$. Thus, by definition we have that for any patient i, $P(x_i = 1) = 0.25$, and $P(x_i = 0) = 0.75$.
+
+  Hence, it follows that 
+
+  \[
+  X = \sum_{i = 1}^{8} x_i
+  \]
+
+  To derive the mean and variance of X, we can first consider the expectation of each $x_i$:
+
+  \[
+  \mathbb{E}x_i = 1P(x_i = 1) + 0P(x_i = 0) = 0.25
+  \]
+
+  Hence, because each patient is independent, and we know that the expectation of the sum of independent random variables is just the sum of each individual expectation, we have:
+
+  \[
+  \mathbb{E}X = \mathbb{E}[\sum_{i = 1}^{8} x_i] = \sum_{i = 1}^{8} \mathbb{E}[x_i] = \sum_{i = 1}^{8} 0.25 = 8*0.25 = 2
+  \]
+
+  Similarly,
+
+  \[
+  \mathbb{E}x^2_i = 1^2P(x_i = 1) + 0^2P(x_i = 0) = 0.25
+  \]
+
+  \[
+  \text{Var}x_i = \mathbb{E}x^2_i - \mathbb{E}[x_i]^2 = 0.25 - 0.25^2 = 0.25 - 0.0625 = 0.1875
+  \]
+
+  Importantly, we know that each $x_i$ is independent, and the variance of the sum of independent random variables is just the sum of their respective variances. Hence:
+  \[
+  \text{Var}X = \text{Var}[\sum_{i = 1}^{8} x_i] = \sum_{i = 1}^{8} \text{Var}[x_i] = \sum_{i = 1}^{8} 0.1875 = 8*0.1875 = 1.5
+  \]
+  
 
   \item Calls arrive according to a homogeneous Poisson process at a rate of 6 per hour. Let $Y$ count calls in 45 minutes. State its distribution and calculate $P(Y = 0)$, $P(Y \geq 2)$, $E(Y)$, and $\text{Var}(Y)$.
   \solution
 
+  Because we know that calls arrive at a rate of 6 per hour, we can conclude that they also arrive at a rate of 4.5 per 45 minutes. Therefore, our rate for $Y$ is $\lambda = 4.5$. Based on the given assumptions, we can conclude that $Y \sim \text{Poi}(4.5)$. Hence Y has the following pdf:
+
+  \[
+  \mathbb{P}(Y = y) = \frac{4.5^y e^{-4.5}}{y!}
+  \]
+
+  Based on this pdf we can calculate the requested probabilities as follows:
+
+  \[
+  \mathbb{P}(Y = 0) = \frac{4.5^0 e^{-4.5}}{0!} = e^{-4.5}
+  \]
+
+  \[
+   \]
+
+  \begin{align*}
+  \mathbb{P}(Y \geq 2) &= 1 - \mathbb{P}(Y < 2) \\
+  &= 1 - (\mathbb{P}(Y = 0) + \mathbb{P}(Y = 1)) \\
+  &= 1 - (e^{-4.5} + \frac{4.5^1 e^{-4.5}}{1!}) \\
+  &= 1 - (e^{-4.5} + 4.5e^{-4.5}) \\
+  &= 1 - (5.5e^{-4.5}) \\
+  &= \frac{e^{4.5} - 5.5}{e^{4.5}}
+  \end{align*}
+
+
+  We can also find the requested Var(Y) and $\mathbb{E}Y$ as follows:
+
+  \begin{align*}
+    \mathbb{E}Y &= \sum_{y = 0}^{\infty} y \mathbb{P}(Y = y) \\
+    &= \sum_{y = 0}^{\infty} y \frac{4.5^y e^{-4.5}}{y!} \\
+    &= e^{-4.5}\sum_{y = 1}^{\infty} \frac{4.5^y}{(y-1)!} \\
+    &= 4.5 e^{-4.5}\sum_{y = 0}^{\infty} \frac{4.5^y}{y!}
+  \end{align*}
+
+  Now, note that $\sum_{y = 0}^{\infty} \frac{4.5^y}{y!}$ is the taylor series expansion for $e^{4.5}$. Therefore:
+  \begin{align*}
+    \mathbb{E}Y &= 4.5 e^{-4.5}\sum_{y = 0}^{\infty} \frac{4.5^y}{y!} \\
+    &= 4.5 e^{-4.5} e^{4.5} \\
+    &= 4.5 = \lambda
+  \end{align*}
+
+  To derive the variance of $Y$, let us first find the second moment of Y:
+
+
+  \begin{align*}
+    \mathbb{E}Y^2 &= \sum_{y = 0}^{\infty} y^2 \mathbb{P}(Y = y) \\
+    &= \sum_{y = 0}^{\infty} y^2 \frac{4.5^y e^{-4.5}}{y!} \\
+    &= e^{-4.5}\sum_{y = 1}^{\infty} y \frac{4.5^y}{(y-1)!} \\
+    &= 4.5 e^{-4.5}\sum_{y = 1}^{\infty} y \frac{4.5^{y-1}}{(y-1)!} \\
+    &= 4.5 e^{-4.5}\sum_{y = 0}^{\infty} (y+1) \frac{4.5^{y}}{y!} \\
+    &= 4.5 e^{-4.5} [\sum_{y = 0}^{\infty} y \frac{4.5^{y}}{y!} + \sum_{y = 0}^{\infty}\frac{4.5^{y}}{y!}] \\
+    &= 4.5 \sum_{y = 0}^{\infty} y \frac{4.5^{y}e^{-4.5}}{y!} + 4.5e^{-4.5}\sum_{y = 0}^{\infty}\frac{4.5^{y}}{y!} \\
+    &= 4.5[\mathbb{E}Y + 1] \\
+    &= 4.5[4.5 + 1] \\
+    & = (4.5)^2 + 4.5= \lambda^2 + \lambda
+  \end{align*}
+
+  Hence, now that we have the first and second moments of $Y$, we can derive the variance of $Y$:
+  \[
+  Var(Y) = \mathbb{E}Y^2 - (\mathbb{E}Y)^2 = 4.5^2 + 4.5 - 4.5^2 = 4.5 = \lambda
+  \]
+
+
   \item Explain why the parameter for 45 minutes is not 6. Give one feature of real call arrivals that could make the homogeneous Poisson model inappropriate.
   \solution
+
+  The parameter for 45 minutes is not 6, because 6 represents the number of calls we expect in one hour. Hence, we need to scale the rate by $\frac{3}{4}$ to get 4.5, which represents the expected calls in 45 minutes.
+  In real call arrivals, distribution of calls in an hour may not be homogenous and could vary depending on time of day or day of the week. A homogenous poisson assumes a constant rate at each interval, but we could have some 45-minute periods with 30 calls and others with none. High variance cases make the model less appropriate.
+
 \end{enumerate}
 
 %==================================================
