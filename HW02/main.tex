@@ -340,14 +340,133 @@ cx^2, & 0 < x < 1, \\
   \item Determine $c$ by integration, and write the complete piecewise CDF.
   \solution
 
+  We can determine c by using that fact since $f_X(x)$ is a valid pdf, the function must integrate to 1. Hence:
+
+  \begin{align*}
+    1 &= \int_{-\infty}^{\infty} f_X(x) dx \\
+    &= \int_{0}^{1} cx^2 dx\\
+    &= [\frac{c}{3}x^3]_{0}^{1} \\
+    &= \frac{c}{3}(1) - \frac{c}{3}(0) \\
+    &= \frac{c}{3}
+  \end{align*}
+
+  Therefore, we can conclude that $c = 3$.
+
+  We can find the CDF of X as follows. When $x \leq 0$:
+  \[
+  F_X(x) = \int_{-\infty}^{x} f_X(u) du = \int_{-\infty}^{x} 0 du = 0
+  \]
+
+  
+  
+  For the case where $0 < x < 1$:
+
+  \[
+  F_X(x) = \int_{-\infty}^{x} f_X(u) du = \int_{-\infty}^{0} 0 du + \int_{0}^{x} 3u^2 du = \frac{3}{3}x^3 = x^3
+  \]
+
+  For the case where $x \geq 1$:
+
+  \[
+  F_X(x) = \int_{-\infty}^{x} f_X(u) du = \int_{-\infty}^{0} 0 du + \int_{0}^{1} 3u^2 du  + \int_{1}^{x} 0 du= [\frac{3}{3}x^3]^1_0 = 1
+  \]
+
+  Therefore, the full piecewise CDF is given by:
+
+  \[
+  F_X(x) = \begin{cases}
+    0, \ x \leq 0 \\
+    x^3, \ 0 < x < 1 \\
+    1, \ x \geq 1
+  \end{cases}
+  \]
+
+
+
   \item Calculate $P(0.25 < X < 0.75)$, $E(X)$, $E(X^2)$, and $\text{Var}(X)$ using integrals.
   \solution
+
+  Because our pdf is continuous, we can represent the requested probabilty as follows:
+
+  \begin{align*}
+    \mathbb{P}(0.25 < X < 0.75) &= \mathbb{P}(X \leq 0.75) - \mathbb{P}(X \leq 0.25) \\
+    &= F_X(0.75) - F_X(0.25) \\
+    &= 0.75^3 - 0.25^3 \\
+    &= 0.422 - 0.016 \\
+    &= 0.406
+  \end{align*}
+
+  Observe the following calculations for $\mathbb{E}X$, $\mathbb{E}X^2$, and $\text{Var}X$:
+
+  \begin{align*}
+    \mathbb{E}X &= \int_{-\infty}^{\infty} xf_X(x) dx \\
+    &= \int_{0}^{1} x(3x^2) dx \\
+    &= [\frac{3}{4}x^4]_0^1 \\
+    &= \frac{3}{4}1^4 - \frac{3}{4}0^4 \\
+    &= \frac{3}{4}
+  \end{align*}
+
+  \begin{align*}
+    \mathbb{E}X^2 &= \int_{-\infty}^{\infty} x^2f_X(x) dx \\
+    &= \int_{0}^{1} x^2(3x^2) dx \\
+    &= [\frac{3}{5}x^5]_0^1 \\
+    &= \frac{3}{5}1^5 - \frac{3}{4}0^4 \\
+    &= \frac{3}{5}
+  \end{align*}
+
+  \begin{align*}
+    \text{Var}(X) &= \mathbb{E}X^2 - (\mathbb{E}X)^2 \\
+    &= \frac{3}{5} - (\frac{3}{4})^2 \\
+    &= \frac{3}{5} - \frac{9}{16} \\
+    &= \frac{48}{80} - \frac{45}{80} \\
+    &= \frac{3}{80}
+  \end{align*}
 
   \item Calculate $f_X(0.8)$ and $P(X = 0.8)$. Explain why a density value greater than one is valid.
   \solution
 
+  Observe the following calculations:
+
+  \[
+  f_X(0.8) = 3(0.8)^2 = 3(0.64) = 1.92
+  \]
+
+  \[
+  \mathbb{P}(X = 0.8) = \int_{0.8}^{0.8} f_X(x) dx = \int_{0.8}^{0.8} 3x^2 dx = [x^3]_{0.8}^{0.8} = 0
+  \]
+
+  A density value greater than 1 is valid because we have a continuous pdf, so the value of $f_X(x)$ does not represent a probability, just the height of the pdf. We get probabilities by integrating over the pdf between a range of points, not from the raw value.
+
+
   \item Separately, let $W \sim \text{Uniform}(4, 16)$. Calculate $P(7 < W < 13)$, $E(W)$, and $\text{Var}(W)$.
   \solution
+
+  We know the PDF of the uniform distribution is given by:
+  
+  \[
+  f_W(w) = \frac{1}{16-4} = \frac{1}{12}
+  \]
+
+  Therefore, we can calculate the requested quantities as follows:
+
+  \[
+  \mathbb{P}(7 < W < 13) = \int_{7}^{13} f_W(w) dw = [\frac{1}{12}w]_7^{13} = \frac{13}{12} - \frac{7}{12} = \frac{1}{2}
+  \]
+
+  \[
+  \mathbb{E}W = \int_{-\infty}^{\infty} wf_W(w) dw = [\frac{1}{24}w^2]_7^{13} = \frac{169}{24} - \frac{49}{24} = \frac{120}{24} = 5
+  \]
+
+  \[
+    \mathbb{E}W^2 = \int_{-\infty}^{\infty} w^2f_W(w) dw = [\frac{1}{36}w^3]_7^{13} = \frac{2197}{36} - \frac{343}{36} = \frac{1854}{36} = 51.5
+  \]
+
+  \[
+  \text{Var}(W) = \mathbb{E}W^2 - (\mathbb{E}W)^2 = 51.5 - 25 = 26.5
+  \]
+
+
+
 \end{enumerate}
 
 %==================================================
@@ -362,6 +481,8 @@ For hand calculations, use the supplied values: $\Phi(1.5) = 0.933193$, $\Phi(2)
 \begin{enumerate}[label=\textbf{(\alph*)}]
   \item Find the probability that one measurement exceeds 118, and find the 90th percentile of individual measurements. Show the standardization or quantile equation.
   \solution
+
+  
 
   \item For a sample of 36 measurements, derive $E(\bar{X})$, $\text{Var}(\bar{X})$, and $\text{SE}(\bar{X})$. State the exact sampling distribution of $\bar{X}$ and calculate $P(\bar{X} > 104)$.
   \solution

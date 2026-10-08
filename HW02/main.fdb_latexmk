@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1791405959.45348 "/Users/jsm2298/Desktop/Classes_F26/P8130/HW02/main.tex" "main.pdf" "main" 1791405959.7145 0
-  "/Users/jsm2298/Desktop/Classes_F26/P8130/HW02/main.tex" 1791405959.30426 24616 cb6cb97f9821b93e7386419b2f991df8 ""
+["pdflatex"] 1791470815.9701 "/Users/jsm2298/Desktop/Classes_F26/P8130/HW02/main.tex" "main.pdf" "main" 1791470816.2386 0
+  "/Users/jsm2298/Desktop/Classes_F26/P8130/HW02/main.tex" 1791470815.78384 27853 0c5687820d3be069a54eaa9d7366438a ""
   "/usr/local/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -69,8 +69,8 @@
   "/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1791226045 5573038 b99aad5e4898a9034e953632f940512b ""
   "/usr/local/texlive/2026/texmf-var/web2c/pdftex/pdflatex.fmt" 1774209607 3636776 dc5fa9b6b1453b9d196cd42edf876004 ""
   "/usr/local/texlive/2026/texmf.cnf" 1774209515 577 648cd9f92f9c0eac486f4c71c85cfbbe ""
-  "main.aux" 1791405959.68394 33 f5162ef287409618820a40adc8e2d2a1 "pdflatex"
-  "main.tex" 1791405959.30426 24616 cb6cb97f9821b93e7386419b2f991df8 ""
+  "main.aux" 1791470816.20975 33 dca2c25acf2dd0fcc68a5b8e6d3e57b9 "pdflatex"
+  "main.tex" 1791470815.78384 27853 0c5687820d3be069a54eaa9d7366438a ""
   (generated)
   "main.aux"
   "main.log"
